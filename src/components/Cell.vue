@@ -1,12 +1,14 @@
 <template>
     <div class="cell">
-        <div class="inner-cell">0</div>
+        <div class="inner-cell">{{ value }}</div>
     </div>
 </template>
 
 <script>
 export default {
-    
+    props: {
+        value: Number
+    }
 }
 </script>
 

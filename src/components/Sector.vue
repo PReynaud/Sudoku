@@ -1,6 +1,8 @@
 <template>
     <div class="inner-sector">
-        <Cell v-for="oneCell in values" v-bind:key="oneCell"/>
+        <Cell v-for="oneCell in values" 
+            v-bind:key="oneCell"
+            v-bind:value="oneCell"/>
     </div>
 </template>
 

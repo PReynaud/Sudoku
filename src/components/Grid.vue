@@ -8,7 +8,7 @@
 
 <script>
 import Sector from './Sector.vue'
-import SudokuUtils from '@/utils/sudoku.utils'
+// import SudokuUtils from '@/utils/sudoku.utils'
 
 export default {
     components: {
@@ -16,7 +16,16 @@ export default {
     },
     data() {
         return {
-            gridData: SudokuUtils.generateEmptyGrid()
+            // gridData: SudokuUtils.generateEmptyGrid(),
+            gridData: [[1, 2, 3, 4, 5, 6, 7, 8, 9],
+            [4, 5, 6, 7, 8, 9, 1, 2, 3],
+            [7, 8, 9, 1, 2, 3, 4, 5, 6],
+            [3, 1, 2, 6, 4, 5, 9, 7, 8],
+            [6, 4, 5, 9, 7, 8, 3, 1, 2],
+            [9, 7, 8, 3, 1, 2, 6, 4, 5],
+            [2, 3, 1, 5, 6, 4, 8, 9, 7],
+            [5, 6, 4, 8, 9, 7, 2, 3, 1],
+            [8, 9, 7, 2, 3, 1, 5, 6, 4]]
         }
     }
 }
