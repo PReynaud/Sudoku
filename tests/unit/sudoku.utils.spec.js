@@ -56,4 +56,43 @@ describe('sudoku.utils', () => {
         grid[1] = [1, 5, 6, 7, 8, 9, 1, 2, 3]
         expect(SudokuUtils.checkRow(grid, 0)).toBe(false)
     })
+
+    it('should select the column given in param', () => {
+        const firstColumn = SudokuUtils.selectColumn(validGrid, 0)
+        expect(firstColumn).toEqual([1, 4, 7, 3, 6, 9, 2, 5, 8])
+
+        const secondColumn = SudokuUtils.selectColumn(validGrid, 1)
+        expect(secondColumn).toEqual([2, 5, 8, 1, 4, 7, 3, 6, 9])
+
+        const thirdColumn = SudokuUtils.selectColumn(validGrid, 2)
+        expect(thirdColumn).toEqual([3, 6, 9, 2, 5, 8, 1, 4, 7])
+
+        const fourthColumn = SudokuUtils.selectColumn(validGrid, 3)
+        expect(fourthColumn).toEqual([4, 7, 1, 6, 9, 3, 5, 8, 2])
+
+        const lastColumn = SudokuUtils.selectColumn(validGrid, 8)
+        expect(lastColumn).toEqual([9, 3, 6, 8, 2, 5, 7, 1, 4])
+    })
+
+    it('should check if a column is valid', () => {
+        const grid = cloneDeep(validGrid)
+        expect(SudokuUtils.checkColumn(grid, 0)).toBe(true)
+
+        grid[0] = [1, 2, 3, 1, 5, 6, 7, 8, 9]
+        expect(SudokuUtils.checkColumn(grid, 0)).toBe(false)
+        
+        grid[0] = [1, 2, 3, 4, 5, 6, 2, 8, 9]
+        expect(SudokuUtils.checkColumn(grid, 0)).toBe(false)
+    })
+
+    it('should check if a sector is valid', () => {
+        const grid = cloneDeep(validGrid)
+        expect(SudokuUtils.checkSector(grid, 0)).toBe(true)
+
+        grid[0] = [1, 2, 3, 1, 5, 6, 7, 8, 9]
+        expect(SudokuUtils.checkSector(grid, 0)).toBe(false)
+        
+        grid[0] = [1, 2, 3, 4, 2, 6, 7, 8, 9]
+        expect(SudokuUtils.checkSector(grid, 0)).toBe(false)
+    })
 })

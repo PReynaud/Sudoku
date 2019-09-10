@@ -26,12 +26,28 @@ export default {
         const rowToCheck = this.selectRow(grid, indexOfRowToCheck)
         return rowToCheck.length === uniq(rowToCheck).length
     }, 
-    
-    checkColumn() {
 
+    selectColumn(grid, columnIndex) {
+        // to select a column we take the same index in (modulo 3) row
+        const firstIndexOfRowsToSelect = Math.floor(columnIndex / 3)
+        const firstIndexOfArraysToSelect = (columnIndex % 3)
+
+        const result = []
+        for (let i = firstIndexOfRowsToSelect; i < 9; i =  i + 3) {
+            for (let j = firstIndexOfArraysToSelect; j < 9; j = j + 3) {
+                result.push(grid[i][j])
+            }
+        }
+        return result
+    },
+    
+    checkColumn(grid, indexOfColumnToCheck) {
+        const columnToCheck = this.selectColumn(grid, indexOfColumnToCheck)
+        return columnToCheck.length === uniq(columnToCheck).length
     },
 
-    checkSector() {
-        
+    checkSector(grid, indexOfSectorToCheck) {
+        const sectorToCheck = grid[indexOfSectorToCheck]
+        return sectorToCheck.length === uniq(sectorToCheck).length
     }
 }
