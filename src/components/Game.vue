@@ -1,15 +1,18 @@
 <template>
-    <div>
-        <Grid />
-    </div>
+  <div>
+    <Grid v-bind:gridData="gridData" />
+  </div>
 </template>
 
 <script>
-import Grid from './Grid.vue'
+import Grid from "./Grid.vue";
 
 export default {
-    components: {
-        Grid
-    }
-}
+  components: {
+    Grid
+  },
+  props: {
+    gridData: Array
+  }
+};
 </script>

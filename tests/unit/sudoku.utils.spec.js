@@ -51,7 +51,7 @@ describe('sudoku.utils', () => {
 
         grid[0] = [1, 1, 3, 4, 5, 6, 7, 8, 9]
         expect(SudokuUtils.checkRow(grid, 0)).toBe(false)
-        
+
         grid[0] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         grid[1] = [1, 5, 6, 7, 8, 9, 1, 2, 3]
         expect(SudokuUtils.checkRow(grid, 0)).toBe(false)
@@ -80,7 +80,7 @@ describe('sudoku.utils', () => {
 
         grid[0] = [1, 2, 3, 1, 5, 6, 7, 8, 9]
         expect(SudokuUtils.checkColumn(grid, 0)).toBe(false)
-        
+
         grid[0] = [1, 2, 3, 4, 5, 6, 2, 8, 9]
         expect(SudokuUtils.checkColumn(grid, 0)).toBe(false)
     })
@@ -91,8 +91,86 @@ describe('sudoku.utils', () => {
 
         grid[0] = [1, 2, 3, 1, 5, 6, 7, 8, 9]
         expect(SudokuUtils.checkSector(grid, 0)).toBe(false)
-        
+
         grid[0] = [1, 2, 3, 4, 2, 6, 7, 8, 9]
         expect(SudokuUtils.checkSector(grid, 0)).toBe(false)
+    })
+
+    it('should convert a string grid to an object grid', () => {
+        const grid = [[1, 2, 3], [4, 5, 6]]
+        const expectedResult = [[
+            {
+                startValue: false,
+                color: null,
+                value: 1
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 2
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 3
+            }
+        ], [
+            {
+                startValue: false,
+                color: null,
+                value: 4
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 5
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 6
+            }
+        ]]
+        expect(SudokuUtils.gridToObject(grid)).toEqual(expectedResult)
+        expect(grid).not.toBe(expectedResult)
+    })
+
+    it('should convert an object grid to a string grid', () => {
+        const grid = [[
+            {
+                startValue: false,
+                color: null,
+                value: 1
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 2
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 3
+            }
+        ], [
+            {
+                startValue: false,
+                color: null,
+                value: 4
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 5
+            },
+            {
+                startValue: false,
+                color: null,
+                value: 6
+            }
+        ]]
+        const expectedResult = [[1, 2, 3], [4, 5, 6]]
+        expect(SudokuUtils.objectToGrid(grid)).toEqual(expectedResult)
+        expect(grid).not.toBe(expectedResult)
     })
 })

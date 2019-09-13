@@ -1,4 +1,6 @@
 import uniq from 'lodash/uniq'
+import cloneDeep from 'lodash/cloneDeep'
+import forEach from 'lodash/forEach'
 
 export default {
     generateEmptyGrid() {
@@ -25,7 +27,7 @@ export default {
     checkRow(grid, indexOfRowToCheck) {
         const rowToCheck = this.selectRow(grid, indexOfRowToCheck)
         return rowToCheck.length === uniq(rowToCheck).length
-    }, 
+    },
 
     selectColumn(grid, columnIndex) {
         // to select a column we take the same index in (modulo 3) row
@@ -33,14 +35,14 @@ export default {
         const firstIndexOfArraysToSelect = (columnIndex % 3)
 
         const result = []
-        for (let i = firstIndexOfRowsToSelect; i < 9; i =  i + 3) {
+        for (let i = firstIndexOfRowsToSelect; i < 9; i = i + 3) {
             for (let j = firstIndexOfArraysToSelect; j < 9; j = j + 3) {
                 result.push(grid[i][j])
             }
         }
         return result
     },
-    
+
     checkColumn(grid, indexOfColumnToCheck) {
         const columnToCheck = this.selectColumn(grid, indexOfColumnToCheck)
         return columnToCheck.length === uniq(columnToCheck).length
@@ -49,5 +51,21 @@ export default {
     checkSector(grid, indexOfSectorToCheck) {
         const sectorToCheck = grid[indexOfSectorToCheck]
         return sectorToCheck.length === uniq(sectorToCheck).length
+    },
+
+    gridToObject(stringToConvert) {
+        return stringToConvert.map(sectors => {
+            return sectors.map(value => ({
+                startValue: false,
+                color: null,
+                value
+            }))
+        })
+    },
+
+    objectToGrid(gridToConvert) {
+        return gridToConvert.map(sectors => {
+            return sectors.map(valueObject => valueObject.value)
+        })
     }
 }
